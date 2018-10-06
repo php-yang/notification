@@ -37,6 +37,10 @@ final class Center
      */
     public static function occur($type, $data = null)
     {
+        if (!isset(self::$receivers[$type])) {
+            return;
+        }
+
         foreach (self::$receivers[$type] as $receiver) {
             $receiver->onNotification($type, $data);
         }
