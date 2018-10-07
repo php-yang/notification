@@ -39,7 +39,7 @@ final class Center
      */
     public static function occur($type, $data = null)
     {
-        if (isset(self::$receivers[$type])) {
+        if (!isset(self::$receivers[$type])) {
             self::$receivers[$type] = array();
         }
 
