@@ -8,10 +8,12 @@ namespace Yang\Notification;
  */
 final class Center
 {
+    const ALL = '*';
+
     /**
      * @var IReceiver[][]
      */
-    protected static $receivers = array();
+    protected static $receivers = array(self::ALL => array());
 
     /**
      * @param string $type
@@ -42,6 +44,10 @@ final class Center
         }
 
         foreach (self::$receivers[$type] as $receiver) {
+            $receiver->onNotification($type, $data);
+        }
+
+        foreach (self::$receivers[self::ALL] as $receiver) {
             $receiver->onNotification($type, $data);
         }
     }
